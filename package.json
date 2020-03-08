@@ -1,0 +1,19 @@
+{
+  "name": "nami",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "qrcode-terminal": "^0.12.0",
+    "urlencode": "^1.1.0",
+    "wechaty": "^0.32.4",
+    "wechaty-puppet-padplus": "^0.4.7"
+  }
+}
