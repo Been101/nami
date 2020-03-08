@@ -18,7 +18,7 @@
 |---- config.js		  	// 配置文件
 |---- onScan.js				// 机器人需要扫描二维码时监听回调
 |---- onRoomJoin.js 	// 进入房间监听回调
-|---- message.js		  // 消息监听回调
+|---- message/	      // 消息处理
 |---- onFriendShip.js	// 好友添加监听回调
 |---- utils.js        // 工具方法
 |-- package.json
