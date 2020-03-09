@@ -8,7 +8,6 @@
  * @return {Promise} true-是 false-不是
  */
 
-const { Room } = require("wechaty")
 const { name, room: { roomList } } = require("../config")
 // 机器人名字
 // const name = config.name
@@ -36,11 +35,15 @@ async function isAddRoom(msg) {
  * @return {Promise} true-是群聊 false-不是群聊
  */
 
-async function isInRoom(msg) {
+async function isInRoom(bot, msg) {
   // 回复信息为管理的群聊名
   if (Object.keys(roomList).some(v => v == msg.text())) {
     // 通过群聊id获取到该群聊实例
-    const room = await Room.find({ topic: roomList[msg.text()] })
+    const room = await bot.Room.find({ topic: roomList[msg.text()] })
+    if (!room) {
+      await msg.say("我还没管理这个群！")
+      return true
+    }
 
     // 判断是否在房间中 在-提示并结束
     if (await room.has(msg.from())) {

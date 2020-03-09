@@ -14,6 +14,7 @@ const roomList = config.room.roomList
 // 进入房间监听回调 room-群聊 inviteeList-受邀者名单 inviter-邀请者
 module.exports = async function onRoomJoin(room, inviteeList, inviter) {
   // 判断配置项群组id数组中是否存在该群聊id
+  console.log(room.id, '<----room id---')
   if (Object.values(roomList).some(v => v == room.id)) {
     // let roomTopic = await room.topic()
     inviteeList.map(c => {

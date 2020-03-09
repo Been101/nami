@@ -24,6 +24,6 @@ const bot = new Wechaty({
 bot
   .on("scan", onScan) // 机器人需要扫描二维码时监听
   .on("room-join", onRoomJoin) // 加入房间监听
-  .on("message", onMessage) // 消息监听
+  .on("message", onMessage(bot)) // 消息监听 // 有些消息需要用到 wechaty 实例所以传入 bot
   .on("friendship", onFriendShip) // 好友添加监听
   .start()

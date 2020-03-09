@@ -11,15 +11,15 @@
 const request = require("axios")
 // 请求参数解码
 const urlencode = require("urlencode")
-const { task } = require('../config')
+const { task, name } = require('../config')
 const { getNow } = require('../utils')
 
 function msgReply(info) {
   let url = `https://open.drea.cc/bbsapi/chat/get?keyWord=${urlencode(info)}`
   return request.get(url).then(res => {
-    if (res.statusCode == 200) {
-      if (res.isSuccess) {
-        let reply = res.data.reply
+    if (res.status == 200) {
+      if (res.data.isSuccess) {
+        let reply = res.data.data.reply
         // 免费的接口，所以需要把机器人名字替换成为自己设置的机器人名字
         reply = reply.replace(/Smile/g, name)
         return reply
