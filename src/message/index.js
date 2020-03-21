@@ -8,6 +8,7 @@ const { Message } = require("wechaty")
 // 配置文件
 const { isAddRoom, isInRoom } = require('./msg_room')
 const { msgReply, taskApiSync } = require('./reply')
+const { room: { roomList } } = require('../config')
 const msgReg = /^娜美/
 // 消息监听回调
 module.exports = bot => {
@@ -27,20 +28,25 @@ module.exports = bot => {
     console.log(`text: ${msg.text()}`)
     console.log(`isRoom: ${msg.room()}`)
     console.log("=============================")
-
     // 判断此消息类型是否为文本
     if (msg.type() == Message.Type.Text) {
       // 判断消息类型来自群聊
       if (msg.room()) {
         // 获取群聊
         const room = await msg.room()
+        const currentRoom = roomList.find(r => r.id === roomm.id)
+        console.log(room.id, '<---room id---', currentRoom)
+
         setInterval(async () => {
           const news = await taskApiSync();
           news && room.say(news)
         }, 1000);
         if (msgReg.test(msg.text())) {
           let sendText = msg.text().replace('娜美', "")
-
+          if (sendText === '代理' || sendText === '助手') {
+            room.say(currentRoom.temp, msg.from())
+            return
+          }
           // 请求机器人接口回复
           let res = await msgReply(sendText)
 
